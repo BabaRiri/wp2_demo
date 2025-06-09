@@ -20,18 +20,150 @@ body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     min-height: 100vh;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    position: relative;
+    z-index: 5;
+}
+
+/* Navbar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(30, 64, 175, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled {
+    background: linear-gradient(135deg, #1e40af 0%, #3730a3 50%, #1e3a8a 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-logo img {
+    height: 32px;
+    width: auto;
+}
+
+.navbar-logo span {
+    font-weight: 100;
+    font-size: 1.1rem;
+    letter-spacing: 0.8px;
+    font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    text-transform: uppercase;
+    opacity: 0.95;
+    color: rgba(255, 255, 255, 0.98);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.navbar-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.navbar-link {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 6px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar-link:hover {
+    color: white;
+}
+
+.navbar-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+.navbar-link:hover::after,
+.navbar-link.active::after {
+    width: 100%;
+}
+
+.navbar-link.active {
+    color: white;
+    font-weight: 600;
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .navbar-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(20, 30, 70, 0.95);
+        padding: 20px;
+        gap: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .navbar-links.active {
+        display: flex;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
 }
 
 /* Logo Styles */
 .logo-placeholder {
     position: absolute;
-    top: 30px;
+    top: 15px;
     left: 30px;
     z-index: 10;
     background: rgba(255, 255, 255, 0.1);
@@ -40,8 +172,8 @@ body {
     padding: 5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.2);
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,7 +192,7 @@ body {
 
 .full-logo-container {
     position: absolute;
-    top: 30px;
+    top: 15px;
     right: 30px;
     z-index: 10;
     max-width: 180px;
@@ -115,14 +247,16 @@ body {
 /* Enhanced Hero Section */
 .hero-container {
     background: linear-gradient(135deg, #1e40af 0%, #3730a3 50%, #1e3a8a 100%);
-    border-radius: 20px;
-    margin-bottom: 40px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     position: relative;
     overflow: hidden;
-    min-height: 600px;
+    min-height: 650px;
     display: flex;
     align-items: center;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 40px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    padding-top: 60px; /* Make room for the navbar */
 }
 
 .hero-background {
@@ -152,7 +286,7 @@ body {
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 80px 40px;
+    padding: 40px 40px 80px;
     width: 100%;
 }
 
@@ -400,6 +534,35 @@ body {
 }
 
 /* Section titles */
+.main-section-heading {
+    font-size: 2.2rem;
+    color: #1e293b;
+    text-align: center;
+    margin: 1rem 0 2rem;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.main-section-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #1e40af, #3730a3);
+    border-radius: 3px;
+}
+
+.section-anchor-point {
+    position: relative;
+    top: -80px; /* Height of navbar with some padding */
+    visibility: hidden;
+    pointer-events: none;
+}
+
 .section-title {
     color: #1e293b;
     font-size: 2rem;
@@ -781,19 +944,32 @@ body {
 </head>
 <body>
 
-<div class="container">
-    <!-- Enhanced Hero Section -->
-    <section class="hero-container">
-        <div class="hero-background"></div>
-        <div class="hero-pattern"></div>
+<!-- Navbar -->
+<nav class="navbar" id="main-navbar">
+    <div class="navbar-container">
+        <a href="#" class="navbar-logo">
+            <img src="images/logo_icon.png" alt="WP2 Logo">
+            <span>Working Paper Populator</span>
+        </a>
+        <div class="navbar-links" id="navbar-links">
+            <a href="#about" class="navbar-link">About</a>
+            <a href="#tools" class="navbar-link">Tools</a>
+            <a href="#screenshots" class="navbar-link">Screenshots</a>
+            <a href="#workflows" class="navbar-link">Workflows</a>
+            <a href="#tips" class="navbar-link">Tips</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+    </div>
+</nav>
+
+<!-- Enhanced Hero Section - Full Width -->
+<section class="hero-container">
+    <div class="hero-background"></div>
+    <div class="hero-pattern"></div>
+    <div class="container">
         
         <div class="hero-content">
             <div class="hero-badge">✨ Version 1.7 - Latest Release</div>
-            
-            <!-- Logo icon centered under version badge -->
-            <div class="centered-logo-icon">
-                <img src="images/logo_icon.png" alt="WP2 Logo Icon" class="logo-icon">
-            </div>
             
             <h1 class="hero-title">Working Paper Populator - WP2</h1>
             <p class="hero-subtitle">
@@ -848,11 +1024,16 @@ body {
                 </a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Intro -->
-    <section class="two-col" id="about">
-        <div class="left">
+<div class="container">
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-anchor-point" id="about-anchor"></div>
+        <h2 class="main-section-heading">About WP2</h2>
+        <div class="two-col">
+            <div class="left">
             <div class="card">
                 <h2 class="section-title">🔍 What is WP2?</h2>
                 <p>WP2 (Working Paper Populator) is a comprehensive automation tool designed to streamline UIF TERS claim verification processes at RBR Group. The application automates the generation of standardized working papers by extracting data from Excel files and populating templates, significantly reducing manual effort and ensuring consistency in documentation.</p>
@@ -891,11 +1072,42 @@ body {
                 </div>
             </div>
         </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="tools-section" id="tools">
+        <div class="section-anchor-point" id="tools-anchor"></div>
+        <h2 class="main-section-heading">WP2 Tools Suite</h2>
+        <p style="color: #64748b; margin-bottom: 32px;">Below is a comprehensive overview of the tools shipped with WP2. Each tool is designed to handle specific aspects of the UIF TERS claim verification process.</p>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <h3 class="tool-title">📄 Single File Processing</h3>
+                <p class="tool-description">Process one UIF TERS claim file at a time with detailed analysis and working paper generation. Perfect for focused review and quality control.</p>
+            </div>
+            <div class="tool-card">
+                <h3 class="tool-title">📚 Multiple File Processing</h3>
+                <p class="tool-description">Batch‑process several UIF TERS claim files and generate working papers with summary results. Ideal for high-volume processing periods.</p>
+            </div>
+            <div class="tool-card">
+                <h3 class="tool-title">📂 Finding Report Path Populator</h3>
+                <p class="tool-description">Match UIF reference numbers and auto‑populate report paths in Excel mail merge sheets. Streamlines report organization and filing.</p>
+            </div>
+            <div class="tool-card">
+                <h3 class="tool-title">📌 Verification Report Generator</h3>
+                <p class="tool-description">Generate verification reports from templates and Excel data. Ensures consistent formatting and comprehensive documentation.</p>
+            </div>
+            <div class="tool-card">
+                <h3 class="tool-title">📊 DataFile Extractor</h3>
+                <p class="tool-description">Extract and transform data from UIF TERS Excel files into standardized formats. Facilitates data analysis and reporting.</p>
+            </div>
+        </div>
     </section>
 
     <!-- Screenshots Section -->
-    <section class="screenshots-section" id="screenshots">
-        <h2 class="section-title">📸 Application Screenshots</h2>
+    <section id="screenshots">
+        <div class="section-anchor-point" id="screenshots-anchor"></div>
+        <h2 class="main-section-heading">Screenshot Gallery</h2>
         <p style="color: #64748b; margin-bottom: 32px;">Get a visual overview of WP2's intuitive interface and powerful features.</p>
         
         <div class="screenshots-grid">
@@ -978,37 +1190,10 @@ body {
         </div>
     </section>
 
-    <!-- Tools -->
-    <section id="tools">
-        <h2 class="section-title">🧰 Available Tools</h2>
-        <p style="color: #64748b; margin-bottom: 32px;">Below is a comprehensive overview of the tools shipped with WP2. Each tool is designed to handle specific aspects of the UIF TERS claim verification process.</p>
-        <div class="tools-grid">
-            <div class="tool-card">
-                <h3 class="tool-title">📄 Single File Processing</h3>
-                <p class="tool-description">Process one UIF TERS claim file at a time with detailed analysis and working paper generation. Perfect for focused review and quality control.</p>
-            </div>
-            <div class="tool-card">
-                <h3 class="tool-title">📚 Multiple File Processing</h3>
-                <p class="tool-description">Batch‑process several UIF TERS claim files and generate working papers with summary results. Ideal for high-volume processing periods.</p>
-            </div>
-            <div class="tool-card">
-                <h3 class="tool-title">📂 Finding Report Path Populator</h3>
-                <p class="tool-description">Match UIF reference numbers and auto‑populate report paths in Excel mail merge sheets. Streamlines report organization and filing.</p>
-            </div>
-            <div class="tool-card">
-                <h3 class="tool-title">📌 Verification Report Generator</h3>
-                <p class="tool-description">Generate verification reports from templates and Excel data. Ensures consistent formatting and comprehensive documentation.</p>
-            </div>
-            <div class="tool-card">
-                <h3 class="tool-title">📊 DataFile Extractor</h3>
-                <p class="tool-description">Extract and transform data from UIF TERS Excel files into standardized formats. Facilitates data analysis and reporting.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Workflows -->
+    <!-- Workflows Section -->
     <section class="workflow-section" id="workflows">
-        <h2 style="margin-top: 0; color: #1e293b; font-size: 1.5rem; font-weight: 700;">🧭 How to Use WP2</h2>
+        <div class="section-anchor-point" id="workflows-anchor"></div>
+        <h2 class="main-section-heading">Workflow Guide</h2>
         <p style="color: #64748b; margin-bottom: 24px;">Follow these step-by-step workflows to get the most out of each WP2 tool.</p>
         
         <div class="tabs" id="tabs">
@@ -1064,9 +1249,10 @@ body {
         </div>
     </section>
 
-    <!-- Quick Tips -->
-    <section id="tips">
-        <h2 class="section-title">💡 Quick Tips & Best Practices</h2>
+    <!-- Tips & Best Practices Section -->
+    <section class="tips-section" id="tips">
+        <div class="section-anchor-point" id="tips-anchor"></div>
+        <h2 class="main-section-heading">Tips & Best Practices</h2>
         <div class="tips-grid">
             <div class="tip-card">
                 <h3 class="tip-title">🔄 Data Preparation</h3>
@@ -1122,6 +1308,78 @@ body {
 <script>
 // Enhanced navigation and interactions
 document.addEventListener('DOMContentLoaded', function() {
+    // Navbar functionality
+    const navbar = document.getElementById('main-navbar');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navbarLinks = document.getElementById('navbar-links');
+    
+    // Handle navbar background on scroll
+    const heroSection = document.querySelector('.hero-container');
+    let heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : 600;
+    
+    function updateNavbarState() {
+        if (window.scrollY > (heroBottom - 100)) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        
+        // Highlight active section in navbar
+        const navbarHeight = 63; // Approximate navbar height in pixels
+        const scrollTriggerPoint = window.scrollY + navbarHeight;
+        let currentActiveSectionId = null;
+
+        // console.clear(); // Optional: Clears console on each scroll event for cleaner logs
+        console.log(`--- Scroll Update ---`);
+        console.log(`window.scrollY: ${window.scrollY.toFixed(2)}`);
+        console.log(`scrollTriggerPoint (scrollY + ${navbarHeight}): ${scrollTriggerPoint.toFixed(2)}`);
+
+        document.querySelectorAll('section[id]').forEach(section => {
+            const sectionId = section.getAttribute('id');
+            const sectionTop = section.offsetTop;
+            const conditionMet = sectionTop <= scrollTriggerPoint;
+
+            console.log(`Section: ${sectionId}, Top: ${sectionTop}, Condition (Top <= Trigger): ${conditionMet}`);
+            
+            if (conditionMet) {
+                currentActiveSectionId = sectionId;
+            }
+        });
+
+        console.log(`Final currentActiveSectionId: ${currentActiveSectionId}`);
+
+        document.querySelectorAll('.navbar-link').forEach(link => {
+            link.classList.remove('active'); // Remove .active from all links first
+            if (link.getAttribute('href') === '#' + currentActiveSectionId) {
+                link.classList.add('active'); // Add .active to the matching link
+            }
+        });
+        // console.log(`---------------------`); // Optional: for cleaner log grouping
+    }
+    
+    window.addEventListener('scroll', updateNavbarState);
+    window.addEventListener('resize', function() {
+        // Recalculate hero bottom position when window resizes
+        heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : 600;
+        updateNavbarState();
+    });
+    
+    // Initial call to set correct state
+    updateNavbarState();
+    
+    // Mobile menu toggle
+    mobileMenuBtn.addEventListener('click', function() {
+        navbarLinks.classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking a link
+    const navLinks = document.querySelectorAll('.navbar-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navbarLinks.classList.remove('active');
+        });
+    });
+    
     // Tab switcher
     var tabButtons = document.querySelectorAll('.tab-btn');
     var tabContents = document.querySelectorAll('.tab-content');
@@ -1143,37 +1401,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Smooth scrolling for navigation links
-    var navLinks = document.querySelectorAll('a[href^="#"]');
-    navLinks.forEach(function(link) {
+    var anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(function(link) {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             var targetId = this.getAttribute('href').substring(1);
-            var targetElement = document.getElementById(targetId);
+            var targetAnchor = document.getElementById(targetId + '-anchor');
+            var targetElement = targetAnchor || document.getElementById(targetId);
             
             if (targetElement) {
-                var offsetTop = targetElement.offsetTop - 20;
+                var targetElPosition = targetElement.getBoundingClientRect().top + window.scrollY - 80; // 80px offset for navbar
                 window.scrollTo({
-                    top: offsetTop,
+                    top: targetElPosition,
                     behavior: 'smooth'
                 });
             }
         });
     });
-    
-    // Add scroll-triggered animations
-    var animatedElements = document.querySelectorAll('.tool-card, .tip-card, .screenshot-card');
-    
-    function checkScroll() {
-        animatedElements.forEach(function(element) {
-            var elementTop = element.getBoundingClientRect().top;
-            var elementVisible = 150;
-            
-            if (elementTop < window.innerHeight - elementVisible) {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }
-        });
-    }
     
     // Initialize elements for animation
     animatedElements.forEach(function(element) {
