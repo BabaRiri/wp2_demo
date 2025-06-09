@@ -1,109 +1,89 @@
-# WP2: Auditor's Data Preparation Assistant
+# WP2: Auditor's Data Preparation Assistant - Informational Website
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Here-brightgreen)](https://babariri.github.io/wp2_demo/) <!-- Assuming index.html is the live demo link -->
+[![Live Website](https://img.shields.io/badge/Live%20Website-View%20Here-brightgreen)](https://babariri.github.io/wp2_demo/)
 
-WP2 is a powerful system designed to streamline the tedious and error-prone process of preparing data for audits. It automates the cleaning, aggregation, sorting, and formatting of data from multiple Excel files, transforming it into ready-to-use working papers. This significantly saves auditors valuable time, enhances data accuracy, and ensures consistent, high-quality outputs.
+This repository contains the source code for the informational website describing **WP2**, an internal tool designed to revolutionize data preparation for auditors.
 
-## 🎯 The Problem WP2 Solves
+## About the WP2 Tool (Internal Application)
+
+WP2 is a powerful system (not hosted in this repository) that streamlines the tedious and error-prone process of preparing data for audits. It automates the cleaning, aggregation, sorting, and formatting of data from multiple Excel files, transforming it into ready-to-use working papers. This significantly saves auditors valuable time, enhances data accuracy, and ensures consistent, high-quality outputs.
+
+### 🎯 The Problem WP2 Solves
 
 Auditors often spend considerable time manually copying, pasting, and manipulating data from various Excel spreadsheets. This manual process is:
 - Time-consuming
 - Prone to errors
 - Leads to inconsistencies in working paper preparation
 
-WP2 automates these preparatory tasks, allowing auditors to focus on analysis and value-added activities.
+The internal WP2 tool automates these preparatory tasks, allowing auditors to focus on analysis and value-added activities.
 
-## ✨ Key Benefits
+### ✨ Key Benefits of the WP2 Tool
 
 - **⏱️ Time Savings**: Drastically reduces manual data preparation effort.
 - **✔️ Accuracy Ensured**: Minimizes human error in data handling and calculations.
 - **📊 Consistency Delivered**: Standardizes the format and quality of working papers.
 - **🚀 Efficiency Boost**: Empowers auditors to work more effectively.
 
-## 🛠️ Features & Tools
+### 🛠️ Features & Tools of the WP2 Application
 
-The WP2 system provides a suite of tools to:
+The internal WP2 system provides a suite of tools to:
 - Ingest data from multiple Excel files.
 - Perform automated data cleaning and validation.
 - Aggregate data based on specified criteria.
 - Sort and organize data meaningfully.
 - Format outputs into standardized working papers.
-- (Add any other specific tools or functionalities here)
+- (And other advanced data processing functionalities)
 
-## 💻 Technology Stack
+### 💻 Technology Behind the WP2 Tool
 
-WP2 leverages a modern technology stack:
-- **Core Application**:
-    - **Python**: For backend logic and data processing.
-    - **Openpyxl**: For robust Excel file manipulation.
-    - **Streamlit**: For building the interactive web application and user interface.
-- **Static Frontend/Demo (if applicable)**:
-    - HTML5
-    - CSS3 (with modern features like Grid and Flexbox)
-    - JavaScript (ES6+)
+The internal WP2 application is built with:
+- **Python**: For backend logic and data processing.
+- **Openpyxl**: For robust Excel file manipulation.
+- **Streamlit**: For its interactive web application interface.
+*(Note: The source code for the WP2 tool itself is proprietary and not available in this public repository.)*
 
-## 🚀 Getting Started
+---
 
-### Prerequisites
+## About This Website (This Repository)
 
-- Python 3.8+
-- Pip (Python package installer)
+This repository hosts the static informational website that you can view at [https://babariri.github.io/wp2_demo/](https://babariri.github.io/wp2_demo/).
 
-### Running the WP2 Streamlit Application
+### 🌐 Website Purpose
 
-1.  **Clone the repository (if applicable):**
+- To provide an overview of the WP2 tool, its features, and benefits.
+- To serve as a point of contact or information for interested parties.
+
+### 🛠️ Website Technology Stack
+
+This website is built using standard web technologies:
+- **HTML5**
+- **CSS3** (utilizing modern features like Flexbox and Grid for layout)
+- **JavaScript (ES6+)** (for any interactive elements on the site)
+
+### 🚀 Developing or Viewing This Website Locally
+
+1.  **Clone this repository:**
     ```bash
-    git clone <your-repository-url>
-    cd wp2_demo # Or the main project directory
+    git clone <this-repository-url>
+    cd wp2_demo
     ```
-2.  **Create and activate a virtual environment (recommended):**
-    ```bash
-    python -m venv venv
-    # On Windows
-    venv\Scripts\activate
-    # On macOS/Linux
-    source venv/bin/activate
-    ```
-3.  **Install dependencies:**
-    (Assuming you have a `requirements.txt` file. If not, we should create one with `streamlit` and `openpyxl`.)
-    ```bash
-    pip install -r requirements.txt
-    ```
-4.  **Run the Streamlit application:**
-    (Assuming your main Streamlit script is named `app.py` or similar. Please adjust if needed.)
-    ```bash
-    streamlit run app.py
-    ```
-    This will typically open the application in your web browser.
+2.  **Open `index.html`:**
+    Simply open the `index.html` file in your preferred web browser to view the website. No special build steps or local server are required.
 
-### Viewing the Static HTML Demo (if `index.html` is a separate component)
+### 📂 Website Project Structure
 
-Simply open the `index.html` file in a modern web browser.
-
-## 📂 Project Structure (Recommended)
-
-For better organization, we recommend a structure like:
+The structure of this website repository is as follows:
 ```
 wp2_demo/
-├── src/                    # Python source code for the Streamlit app (e.g., app.py)
-│   ├── data_processing.py
-│   └── utils.py
-├── data/                   # Sample Excel files or data inputs
-│   └── input/
-│   └── output/
-├── static/                 # For index.html, CSS, JS if separate from Streamlit
-│   ├── css/
-│   └── js/
-│   └── images/
-│   └── index.html
-├── tests/                  # Unit and integration tests
-├── .gitignore
-├── README.md
-├── requirements.txt        # Python dependencies
-└── PLAN.md                 # Project planning document (optional)
-└── PRD.md                  # Product requirements document (optional)
+├── images/                 # Contains images used in the website
+│   └── ...
+├── index.html              # The main HTML file for the website
+├── README.md               # This file
+├── favicon.ico             # Website favicon
+└── .gitignore              # Specifies intentionally untracked files by Git
 ```
+*(Additional CSS or JavaScript files would typically reside in `css/` or `js/` subdirectories if the site grows in complexity.)*
 
 ## 📜 License
 
-This project is licensed under the MIT License.
+The content and code for *this website* are licensed under the MIT License.
