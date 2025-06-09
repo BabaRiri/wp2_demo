@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>WP2 – Demo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta name="description" content="WP2 - The comprehensive web platform for modern data analysis and visualization">
 <style>
 * {
     box-sizing: border-box;
@@ -24,6 +26,90 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+}
+
+/* Logo Styles */
+.logo-placeholder {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.logo-placeholder:hover {
+    transform: scale(1.05);
+}
+
+#brand-logo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.full-logo-container {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 10;
+    max-width: 180px;
+    transition: transform 0.3s ease;
+}
+
+.full-logo-container:hover {
+    transform: translateY(-3px);
+}
+
+#full-logo {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.centered-logo-icon {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.logo-icon {
+    width: 120px;
+    height: auto;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.logo-icon:hover {
+    transform: scale(1.05);
+}
+
+/* Full logo styling in the about section */
+.full-logo-placeholder {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.full-logo-placeholder img {
+    max-width: 140px;
+    height: auto;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    transition: transform 0.3s ease;
+}
+
+.full-logo-placeholder img:hover {
+    transform: translateY(-3px);
 }
 
 /* Enhanced Hero Section */
@@ -392,9 +478,64 @@ body {
     margin: 48px 0;
 }
 
+/* Lightbox for screenshots */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.lightbox-close:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
 .screenshots-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
     gap: 24px;
     margin-top: 24px;
 }
@@ -413,15 +554,45 @@ body {
 }
 
 .screenshot-image {
-    width: 100%;
-    height: 200px;
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #64748b;
-    font-size: 3rem;
-    border-bottom: 1px solid #e2e8f0;
+    height: 300px;
+    background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.zoom-icon {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.screenshot-image:hover .zoom-icon {
+    opacity: 1;
+}
+
+.screenshot-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.screenshot-card:hover .screenshot-image img {
+    transform: scale(1.03);
 }
 
 .screenshot-content {
@@ -615,10 +786,16 @@ body {
     <section class="hero-container">
         <div class="hero-background"></div>
         <div class="hero-pattern"></div>
+        
         <div class="hero-content">
             <div class="hero-badge">✨ Version 1.7 - Latest Release</div>
             
-            <h1 class="hero-title">Welcome to WP2</h1>
+            <!-- Logo icon centered under version badge -->
+            <div class="centered-logo-icon">
+                <img src="images/logo_icon.png" alt="WP2 Logo Icon" class="logo-icon">
+            </div>
+            
+            <h1 class="hero-title">Working Paper Populator - WP2</h1>
             <p class="hero-subtitle">
                 RBR Group's comprehensive automation suite that transforms UIF TERS claim verification 
                 from hours of manual work into minutes of automated precision.
@@ -701,9 +878,17 @@ body {
         </div>
         <div class="right">
             <div class="logo-container">
-                <div class="logo">WP2</div>
-                <h3 style="margin: 0; color: #1e293b; font-weight: 600;">RBR Group</h3>
-                <p style="margin: 8px 0 0 0; color: #64748b; font-size: 0.9rem;">Automation Suite</p>
+                <div class="tab-content" id="tab1" style="display: block;">
+                    <!-- Full logo placement above RBR Group text -->
+                    <div class="full-logo-placeholder">
+                        <img src="images/logo.png" alt="WP2 Full Logo" id="full-logo">
+                    </div>
+                    <h3 style="margin: 0; color: #1e293b; font-weight: 600;">RBR Group</h3>
+                    <p style="margin: 8px 0 0 0; color: #64748b; font-size: 0.9rem;">Automation Suite</p>
+                    <p style="margin: 16px 0 0 0; color: #475569; font-size: 0.95rem; line-height: 1.5;">
+                        RBR Group faced significant challenges with manual UIF TERS claim processing, including time-consuming documentation, inconsistent formatting, and high error rates. WP2 solved these problems by automating data extraction, standardizing working papers, and reducing processing time by 80%, while ensuring compliance with regulatory requirements. The solution has revolutionized RBR's workflow, enabling consultants to focus on high-value analysis rather than repetitive paperwork, resulting in improved client satisfaction and scalable business operations.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -715,7 +900,10 @@ body {
         
         <div class="screenshots-grid">
             <div class="screenshot-card">
-                <div class="screenshot-image">🖥️</div>
+                <div class="screenshot-image">
+                    <img src="images/screenshots/homepage.png" alt="WP2 Main Dashboard Interface" loading="lazy">
+                    <span class="zoom-icon">🔍 Click to expand</span>
+                </div>
                 <div class="screenshot-content">
                     <h3 class="screenshot-title">Main Dashboard</h3>
                     <p class="screenshot-description">Clean and intuitive main interface with easy access to all tools and features.</p>
@@ -723,42 +911,68 @@ body {
             </div>
             
             <div class="screenshot-card">
-                <div class="screenshot-image">📄</div>
+                <div class="screenshot-image">
+                    <img src="images/screenshots/single_file_processing.png" alt="WP2 Single File Processing Interface" loading="lazy">
+                    <span class="zoom-icon">🔍 Click to expand</span>
+                </div>
                 <div class="screenshot-content">
                     <h3 class="screenshot-title">Single File Processing</h3>
-                    <p class="screenshot-description">Step-by-step workflow for processing individual UIF TERS claim files.</p>
+                    <p class="screenshot-description">Step-by-step workflow for processing individual files with detailed validation.</p>
                 </div>
             </div>
             
             <div class="screenshot-card">
-                <div class="screenshot-image">📊</div>
+                <div class="screenshot-image">
+                    <img src="images/screenshots/multiple_file_processing.png" alt="WP2 Multiple File Processing Interface" loading="lazy">
+                    <span class="zoom-icon">🔍 Click to expand</span>
+                </div>
                 <div class="screenshot-content">
-                    <h3 class="screenshot-title">Batch Processing Results</h3>
-                    <p class="screenshot-description">Comprehensive results view showing processing status and generated files.</p>
+                    <h3 class="screenshot-title">Multiple File Processing</h3>
+                    <p class="screenshot-description">Efficient batch processing capability for handling multiple files simultaneously.</p>
                 </div>
             </div>
             
             <div class="screenshot-card">
-                <div class="screenshot-image">📋</div>
+                <div class="screenshot-image">
+                    <img src="images/screenshots/datafile_extractor.png" alt="WP2 Data Extraction Tool" loading="lazy">
+                    <span class="zoom-icon">🔍 Click to expand</span>
+                </div>
                 <div class="screenshot-content">
-                    <h3 class="screenshot-title">Data Extraction View</h3>
-                    <p class="screenshot-description">Preview extracted data before generating working papers.</p>
+                    <h3 class="screenshot-title">Data Extraction Tool</h3>
+                    <p class="screenshot-description">Powerful data extraction capabilities with customizable parsing options.</p>
                 </div>
             </div>
             
             <div class="screenshot-card">
-                <div class="screenshot-image">⚙️</div>
+                <div class="screenshot-image">
+                    <img src="images/screenshots/finding_path_populator.png" alt="WP2 Path Finding Tool" loading="lazy">
+                    <span class="zoom-icon">🔍 Click to expand</span>
+                </div>
                 <div class="screenshot-content">
-                    <h3 class="screenshot-title">Configuration Panel</h3>
-                    <p class="screenshot-description">Customize settings and preferences for optimal workflow.</p>
+                    <h3 class="screenshot-title">Finding Path Populator</h3>
+                    <p class="screenshot-description">Advanced path discovery and mapping for efficient file navigation.</p>
                 </div>
             </div>
             
             <div class="screenshot-card">
-                <div class="screenshot-image">📈</div>
+                <div class="screenshot-image">
+                    <img src="images/screenshots/verification_report_creator.png" alt="WP2 Verification Report Creator" loading="lazy">
+                    <span class="zoom-icon">🔍 Click to expand</span>
+                </div>
                 <div class="screenshot-content">
-                    <h3 class="screenshot-title">Progress Tracking</h3>
-                    <p class="screenshot-description">Real-time progress monitoring for batch operations.</p>
+                    <h3 class="screenshot-title">Verification Report Creator</h3>
+                    <p class="screenshot-description">Comprehensive report generation with validation and error checking.</p>
+                </div>
+            </div>
+            
+            <div class="screenshot-card">
+                <div class="screenshot-image">
+                    <img src="images/screenshots/automatic_merge.png" alt="WP2 Automatic Merge Tool" loading="lazy">
+                    <span class="zoom-icon">🔍 Click to expand</span>
+                </div>
+                <div class="screenshot-content">
+                    <h3 class="screenshot-title">Automatic Merge Tool</h3>
+                    <p class="screenshot-description">Intelligently merge data from multiple sources with conflict resolution capabilities.</p>
                 </div>
             </div>
         </div>
@@ -986,5 +1200,55 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+    <!-- Lightbox for screenshots -->
+    <div class="lightbox" id="screenshot-lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img class="lightbox-image" id="lightbox-img" src="" alt="Screenshot Full View">
+        </div>
+    </div>
+
+    <script>
+        // Lightbox functionality
+        function openLightbox(imgSrc) {
+            const lightbox = document.getElementById('screenshot-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = imgSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+        
+        function closeLightbox() {
+            const lightbox = document.getElementById('screenshot-lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+        
+        // Initialize lightbox for all screenshot images
+        document.addEventListener('DOMContentLoaded', function() {
+            const screenshotImages = document.querySelectorAll('.screenshot-image');
+            screenshotImages.forEach(function(image) {
+                image.addEventListener('click', function() {
+                    const imgSrc = this.querySelector('img').src;
+                    openLightbox(imgSrc);
+                });
+            });
+            
+            // Close lightbox when clicking outside the image
+            document.getElementById('screenshot-lightbox').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeLightbox();
+                }
+            });
+            
+            // Close lightbox with ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && document.getElementById('screenshot-lightbox').classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
