@@ -19,7 +19,7 @@ This project uses vanilla web technologies without build steps:
 
 ## Deployment
 
-This site is deployed using GitHub Pages at [username.github.io/wp2-demo](https://username.github.io/wp2-demo)
+This site is deployed using GitHub Pages at [username.github.io/wp2-demo](https://BabaRiri.github.io/wp2_demo)
 
 ## License
 
