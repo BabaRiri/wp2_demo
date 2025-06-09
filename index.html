@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WP2 – Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #f8fafc;
+    color: #1e293b;
+    line-height: 1.6;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Enhanced Hero Section */
+.hero-container {
+    background: linear-gradient(135deg, #1e40af 0%, #3730a3 50%, #1e3a8a 100%);
+    border-radius: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+    opacity: 0.8;
+}
+
+.hero-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.4;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 80px 40px;
+    width: 100%;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-title {
+    color: #ffffff;
+    font-size: 4rem;
+    font-weight: 800;
+    margin: 0 0 24px 0;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+    letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 40px 0;
+    font-weight: 400;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.stat-item {
+    text-align: center;
+    color: #ffffff;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease-out 0.8s both;
+}
+
+.hero-btn {
+    padding: 16px 32px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 160px;
+    justify-content: center;
+}
+
+.hero-btn-primary {
+    background: #ffffff;
+    color: #1e40af;
+    box-shadow: 0 4px 14px 0 rgba(255, 255, 255, 0.3);
+}
+
+.hero-btn-primary:hover {
+    background: #f8fafc;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px 0 rgba(255, 255, 255, 0.4);
+}
+
+.hero-btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.hero-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.hero-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 60px;
+    animation: fadeInUp 0.8s ease-out 1s both;
+}
+
+.hero-feature {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 24px;
+    border-radius: 16px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+.hero-feature:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.hero-feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.hero-feature-title {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+}
+
+.hero-feature-desc {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Layout helpers */
+.two-col {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+    align-items: start;
+    flex-wrap: wrap;
+}
+
+.two-col .left {
+    flex: 2 1 300px;
+}
+
+.two-col .right {
+    flex: 1 1 200px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+.logo-container {
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+.logo {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Feature list */
+.feature-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+}
+
+.feature-icon {
+    font-size: 1.25rem;
+    width: 24px;
+    text-align: center;
+}
+
+.feature-text {
+    font-weight: 500;
+}
+
+/* Section titles */
+.section-title {
+    color: #1e293b;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 48px 0 24px 0;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #2563eb;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #1d4ed8;
+}
+
+/* Tools grid */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.tool-card {
+    background: white;
+    padding: 28px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #2563eb;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.tool-card:hover::before {
+    transform: scaleY(1);
+}
+
+.tool-title {
+    color: #1e293b;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+}
+
+.tool-description {
+    color: #64748b;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Screenshots Section */
+.screenshots-section {
+    margin: 48px 0;
+}
+
+.screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.screenshot-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.3s ease;
+}
+
+.screenshot-card:hover {
+    transform: scale(1.02);
+}
+
+.screenshot-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    font-size: 3rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.screenshot-content {
+    padding: 20px;
+}
+
+.screenshot-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 8px 0;
+}
+
+.screenshot-description {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Tabs */
+.workflow-section {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 40px;
+}
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 16px;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    border: none;
+    background: #f8fafc;
+    color: #64748b;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.tab-btn.active {
+    background: #2563eb;
+    color: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.tab-btn:hover:not(.active) {
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.step-card {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border-left: 4px solid #2563eb;
+    transition: all 0.2s ease;
+}
+
+.step-card:hover {
+    background: rgba(37, 99, 235, 0.1);
+    transform: translateX(4px);
+}
+
+.step-number {
+    font-weight: 700;
+    color: #2563eb;
+}
+
+/* Tips grid */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.tip-card {
+    background: white;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.3s ease;
+}
+
+.tip-card:hover {
+    transform: translateY(-2px);
+}
+
+.tip-title {
+    color: #1e293b;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+}
+
+.tip-card ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #64748b;
+}
+
+.tip-card li {
+    margin-bottom: 8px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 60px;
+    border-top: 1px solid #e2e8f0;
+    background: white;
+    border-radius: 12px;
+    color: #64748b;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 16px;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content {
+        padding: 60px 24px;
+    }
+    
+    .hero-stats {
+        gap: 20px;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .two-col {
+        flex-direction: column;
+        gap: 24px;
+    }
+    
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .screenshots-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        text-align: left;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Enhanced Hero Section -->
+    <section class="hero-container">
+        <div class="hero-background"></div>
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+            <div class="hero-badge">✨ Version 1.7 - Latest Release</div>
+            
+            <h1 class="hero-title">Welcome to WP2</h1>
+            <p class="hero-subtitle">
+                RBR Group's comprehensive automation suite that transforms UIF TERS claim verification 
+                from hours of manual work into minutes of automated precision.
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">80%</span>
+                    <span class="stat-label">Time Saved</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Tools Available</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Accuracy</span>
+                </div>
+            </div>
+            
+            <div class="hero-actions">
+                <a href="#tools" class="hero-btn hero-btn-primary">
+                    🧰 Explore Tools
+                </a>
+                <a href="#workflows" class="hero-btn hero-btn-secondary">
+                    📋 View Workflows
+                </a>
+            </div>
+            
+            <div class="hero-features">
+                <a href="#tools" class="hero-feature">
+                    <span class="hero-feature-icon">📄</span>
+                    <h3 class="hero-feature-title">Single File Processing</h3>
+                    <p class="hero-feature-desc">Process individual files with precision</p>
+                </a>
+                <a href="#tools" class="hero-feature">
+                    <span class="hero-feature-icon">📚</span>
+                    <h3 class="hero-feature-title">Batch Processing</h3>
+                    <p class="hero-feature-desc">Handle multiple files efficiently</p>
+                </a>
+                <a href="#screenshots" class="hero-feature">
+                    <span class="hero-feature-icon">📊</span>
+                    <h3 class="hero-feature-title">Data Extraction</h3>
+                    <p class="hero-feature-desc">Transform data seamlessly</p>
+                </a>
+                <a href="#tips" class="hero-feature">
+                    <span class="hero-feature-icon">⚡</span>
+                    <h3 class="hero-feature-title">Quick Setup</h3>
+                    <p class="hero-feature-desc">Get started in minutes</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="two-col" id="about">
+        <div class="left">
+            <div class="card">
+                <h2 class="section-title">🔍 What is WP2?</h2>
+                <p>WP2 (Working Paper Populator) is a comprehensive automation tool designed to streamline UIF TERS claim verification processes at RBR Group. The application automates the generation of standardized working papers by extracting data from Excel files and populating templates, significantly reducing manual effort and ensuring consistency in documentation.</p>
+                <div class="feature-section">
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span class="feature-text">Automates repetitive documentation tasks</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span class="feature-text">Ensures consistency across all working papers</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span class="feature-text">Reduces processing time by up to 80%</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span class="feature-text">Minimizes human error in data transfer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="logo-container">
+                <div class="logo">WP2</div>
+                <h3 style="margin: 0; color: #1e293b; font-weight: 600;">RBR Group</h3>
+                <p style="margin: 8px 0 0 0; color: #64748b; font-size: 0.9rem;">Automation Suite</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots-section" id="screenshots">
+        <h2 class="section-title">📸 Application Screenshots</h2>
+        <p style="color: #64748b; margin-bottom: 32px;">Get a visual overview of WP2's intuitive interface and powerful features.</p>
+        
+        <div class="screenshots-grid">
+            <div class="screenshot-card">
+                <div class="screenshot-image">🖥️</div>
+                <div class="screenshot-content">
+                    <h3 class="screenshot-title">Main Dashboard</h3>
+                    <p class="screenshot-description">Clean and intuitive main interface with easy access to all tools and features.</p>
+                </div>
+            </div>
+            
+            <div class="screenshot-card">
+                <div class="screenshot-image">📄</div>
+                <div class="screenshot-content">
+                    <h3 class="screenshot-title">Single File Processing</h3>
+                    <p class="screenshot-description">Step-by-step workflow for processing individual UIF TERS claim files.</p>
+                </div>
+            </div>
+            
+            <div class="screenshot-card">
+                <div class="screenshot-image">📊</div>
+                <div class="screenshot-content">
+                    <h3 class="screenshot-title">Batch Processing Results</h3>
+                    <p class="screenshot-description">Comprehensive results view showing processing status and generated files.</p>
+                </div>
+            </div>
+            
+            <div class="screenshot-card">
+                <div class="screenshot-image">📋</div>
+                <div class="screenshot-content">
+                    <h3 class="screenshot-title">Data Extraction View</h3>
+                    <p class="screenshot-description">Preview extracted data before generating working papers.</p>
+                </div>
+            </div>
+            
+            <div class="screenshot-card">
+                <div class="screenshot-image">⚙️</div>
+                <div class="screenshot-content">
+                    <h3 class="screenshot-title">Configuration Panel</h3>
+                    <p class="screenshot-description">Customize settings and preferences for optimal workflow.</p>
+                </div>
+            </div>
+            
+            <div class="screenshot-card">
+                <div class="screenshot-image">📈</div>
+                <div class="screenshot-content">
+                    <h3 class="screenshot-title">Progress Tracking</h3>
+                    <p class="screenshot-description">Real-time progress monitoring for batch operations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools -->
+    <section id="tools">
+        <h2 class="section-title">🧰 Available Tools</h2>
+        <p style="color: #64748b; margin-bottom: 32px;">Below is a comprehensive overview of the tools shipped with WP2. Each tool is designed to handle specific aspects of the UIF TERS claim verification process.</p>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <h3 class="tool-title">📄 Single File Processing</h3>
+                <p class="tool-description">Process one UIF TERS claim file at a time with detailed analysis and working paper generation. Perfect for focused review and quality control.</p>
+            </div>
+            <div class="tool-card">
+                <h3 class="tool-title">📚 Multiple File Processing</h3>
+                <p class="tool-description">Batch‑process several UIF TERS claim files and generate working papers with summary results. Ideal for high-volume processing periods.</p>
+            </div>
+            <div class="tool-card">
+                <h3 class="tool-title">📂 Finding Report Path Populator</h3>
+                <p class="tool-description">Match UIF reference numbers and auto‑populate report paths in Excel mail merge sheets. Streamlines report organization and filing.</p>
+            </div>
+            <div class="tool-card">
+                <h3 class="tool-title">📌 Verification Report Generator</h3>
+                <p class="tool-description">Generate verification reports from templates and Excel data. Ensures consistent formatting and comprehensive documentation.</p>
+            </div>
+            <div class="tool-card">
+                <h3 class="tool-title">📊 DataFile Extractor</h3>
+                <p class="tool-description">Extract and transform data from UIF TERS Excel files into standardized formats. Facilitates data analysis and reporting.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflows -->
+    <section class="workflow-section" id="workflows">
+        <h2 style="margin-top: 0; color: #1e293b; font-size: 1.5rem; font-weight: 700;">🧭 How to Use WP2</h2>
+        <p style="color: #64748b; margin-bottom: 24px;">Follow these step-by-step workflows to get the most out of each WP2 tool.</p>
+        
+        <div class="tabs" id="tabs">
+            <button class="tab-btn active" data-tab="single">📄 Single File</button>
+            <button class="tab-btn" data-tab="multi">📚 Multiple Files</button>
+            <button class="tab-btn" data-tab="finding">📂 Finding Reports</button>
+            <button class="tab-btn" data-tab="verify">📌 Verification Reports</button>
+            <button class="tab-btn" data-tab="extract">📊 DataFile Extractor</button>
+        </div>
+
+        <div id="single" class="tab-content active">
+            <div class="step-card"><span class="step-number">Step 1:</span> Upload one Excel file with UIF claim data</div>
+            <div class="step-card"><span class="step-number">Step 2:</span> Enter your consultant name for document attribution</div>
+            <div class="step-card"><span class="step-number">Step 3:</span> Select the output directory for generated files</div>
+            <div class="step-card"><span class="step-number">Step 4:</span> Choose which working papers to generate</div>
+            <div class="step-card"><span class="step-number">Step 5:</span> Review company information extracted from the file</div>
+            <div class="step-card"><span class="step-number">Step 6:</span> Generate working papers and view results</div>
+        </div>
+
+        <div id="multi" class="tab-content">
+            <div class="step-card"><span class="step-number">Step 1:</span> Upload multiple Excel files with UIF claim data</div>
+            <div class="step-card"><span class="step-number">Step 2:</span> Enter your consultant name for document attribution</div>
+            <div class="step-card"><span class="step-number">Step 3:</span> Select the output directory for generated files</div>
+            <div class="step-card"><span class="step-number">Step 4:</span> Start batch processing operation</div>
+            <div class="step-card"><span class="step-number">Step 5:</span> Monitor progress with the real‑time progress bar</div>
+            <div class="step-card"><span class="step-number">Step 6:</span> Review summary results table and download files</div>
+        </div>
+
+        <div id="finding" class="tab-content">
+            <div class="step-card"><span class="step-number">Step 1:</span> Upload Excel mail merge file containing UIF references</div>
+            <div class="step-card"><span class="step-number">Step 2:</span> Enter folder path of finding reports directory</div>
+            <div class="step-card"><span class="step-number">Step 3:</span> Run matching process to link references with reports</div>
+            <div class="step-card"><span class="step-number">Step 4:</span> Review matching results and resolve any conflicts</div>
+            <div class="step-card"><span class="step-number">Step 5:</span> Download updated Excel file with populated paths</div>
+        </div>
+
+        <div id="verify" class="tab-content">
+            <div class="step-card"><span class="step-number">Step 1:</span> Upload Excel mail merge data file</div>
+            <div class="step-card"><span class="step-number">Step 2:</span> Upload Word template for report generation</div>
+            <div class="step-card"><span class="step-number">Step 3:</span> Select output directory for generated reports</div>
+            <div class="step-card"><span class="step-number">Step 4:</span> Configure generation options and preferences</div>
+            <div class="step-card"><span class="step-number">Step 5:</span> Generate reports and monitor progress</div>
+            <div class="step-card"><span class="step-number">Step 6:</span> Access generated documents and review results</div>
+        </div>
+
+        <div class="tab-content" id="extract">
+            <div class="step-card"><span class="step-number">Step 1:</span> Upload Excel source file for data extraction</div>
+            <div class="step-card"><span class="step-number">Step 2:</span> Select output directory for transformed files</div>
+            <div class="step-card"><span class="step-number">Step 3:</span> Configure extraction options and data mapping</div>
+            <div class="step-card"><span class="step-number">Step 4:</span> Run extraction process and monitor progress</div>
+            <div class="step-card"><span class="step-number">Step 5:</span> Review extraction results and data quality</div>
+            <div class="step-card"><span class="step-number">Step 6:</span> Download transformed files and reports</div>
+        </div>
+    </section>
+
+    <!-- Quick Tips -->
+    <section id="tips">
+        <h2 class="section-title">💡 Quick Tips & Best Practices</h2>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <h3 class="tip-title">🔄 Data Preparation</h3>
+                <ul>
+                    <li>Ensure Excel files are not password‑protected</li>
+                    <li>Verify all required columns are present and properly formatted</li>
+                    <li>Close Excel applications before uploading files</li>
+                    <li>Use standard UIF TERS format for best results</li>
+                    <li>Remove any merged cells or complex formatting</li>
+                </ul>
+            </div>
+            <div class="tip-card">
+                <h3 class="tip-title">📁 File Management</h3>
+                <ul>
+                    <li>Use descriptive and consistent file naming conventions</li>
+                    <li>Create dedicated output folders for each project</li>
+                    <li>Generated files follow standardized naming patterns</li>
+                    <li>Regularly back up important working papers</li>
+                    <li>Organize files by date and client for easy retrieval</li>
+                </ul>
+            </div>
+            <div class="tip-card">
+                <h3 class="tip-title">⚡ Performance Optimization</h3>
+                <ul>
+                    <li>Process large batches during off‑peak hours</li>
+                    <li>Keep individual Excel files under 10 MB for optimal speed</li>
+                    <li>Close unnecessary applications when processing</li>
+                    <li>Use Multiple File Processing for similar file types</li>
+                    <li>Monitor system resources during batch operations</li>
+                </ul>
+            </div>
+            <div class="tip-card">
+                <h3 class="tip-title">🔍 Troubleshooting</h3>
+                <ul>
+                    <li>Verify data format if processing fails unexpectedly</li>
+                    <li>Ensure all required template files are present</li>
+                    <li>Refresh browser for minor UI issues</li>
+                    <li>Check file permissions for output directories</li>
+                    <li>Contact IT support for persistent technical issues</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p><strong>© 2025 RBR Group | WP2 Version 1.7 | Internal Use Only</strong></p>
+        <p>Developed by Seward Richard Mupereri for RBR Group</p>
+        <p style="font-size: 0.8rem; margin-top: 16px; opacity: 0.7;">This application is designed for internal use by authorized RBR Group personnel only.</p>
+    </footer>
+</div>
+
+<script>
+// Enhanced navigation and interactions
+document.addEventListener('DOMContentLoaded', function() {
+    // Tab switcher
+    var tabButtons = document.querySelectorAll('.tab-btn');
+    var tabContents = document.querySelectorAll('.tab-content');
+    
+    tabButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var targetTab = this.getAttribute('data-tab');
+            
+            tabButtons.forEach(function(b) {
+                b.classList.remove('active');
+            });
+            tabContents.forEach(function(c) {
+                c.classList.remove('active');
+            });
+            
+            this.classList.add('active');
+            document.getElementById(targetTab).classList.add('active');
+        });
+    });
+    
+    // Smooth scrolling for navigation links
+    var navLinks = document.querySelectorAll('a[href^="#"]');
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var targetId = this.getAttribute('href').substring(1);
+            var targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                var offsetTop = targetElement.offsetTop - 20;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Add scroll-triggered animations
+    var animatedElements = document.querySelectorAll('.tool-card, .tip-card, .screenshot-card');
+    
+    function checkScroll() {
+        animatedElements.forEach(function(element) {
+            var elementTop = element.getBoundingClientRect().top;
+            var elementVisible = 150;
+            
+            if (elementTop < window.innerHeight - elementVisible) {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }
+        });
+    }
+    
+    // Initialize elements for animation
+    animatedElements.forEach(function(element) {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
+    // Check scroll on load and scroll events
+    checkScroll();
+    window.addEventListener('scroll', checkScroll);
+    
+    // Add click tracking for hero features
+    var heroFeatures = document.querySelectorAll('.hero-feature');
+    heroFeatures.forEach(function(feature) {
+        feature.addEventListener('click', function(e) {
+            // Add a subtle animation feedback
+            this.style.transform = 'translateY(-4px) scale(0.98)';
+            setTimeout(function() {
+                feature.style.transform = 'translateY(-4px)';
+            }, 150);
+        });
+    });
+});
+</script>
+
+</body>
+</html>
